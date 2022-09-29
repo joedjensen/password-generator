@@ -1,10 +1,11 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
-var alpha = { name: 'alphabetic', chars: 'abcdefghijklmnopqrstuvqxyz', isIncluded: false };
+var lowerAlpha = { name: 'lower case', chars: 'abcdefghijklmnopqrstuvqxyz', isIncluded: false };
+var upperAlpha = { name: 'upper case', chars: lowerAlpha.chars.toUpperCase(), isIncluded: false }
 var nums = { name: 'numeric', chars: '0123456789', isIncluded: false };
 var specChars = { name: 'special', chars: ' !"#$%&\'()*+,-./:;<=>?@{\\]^_`{|}~', isIncluded: false };
-var charArray = [alpha, nums, specChars];
+var charArray = [lowerAlpha, upperAlpha, nums, specChars];
 // Write password to the #password input
 function writePassword() {
   var length = prompt("How long should your password be? 8 to 128 (inclusive)?")
