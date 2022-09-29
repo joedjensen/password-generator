@@ -11,14 +11,15 @@ function writePassword() {
   while (length < 8 || length > 128){
     length = prompt("Please enter a length between 8 and 128");
   }
-
+  
   charArray.forEach(askToIncludeChars);
   while (charArray.filter(charObj => charObj.isIncluded).length == 0){
     alert("Please select at least one type of character to include");
     charArray.forEach(askToIncludeChars);
   }
 
-  var password = generatePassword(length, charArray.filter(charObj => charObj.isIncluded));
+  var characterSet = getCharacterSet(charArray.filter(charObj => charObj.isIncluded))
+  var password = generatePassword(length, characterSet);
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
@@ -33,14 +34,29 @@ function askToIncludeChars(characterObject){
   characterObject.isIncluded = confirm("Include " + characterObject.name + " characters?");
 }
 
-function generatePassword(length, charObjects) {
-  var includedChars='';
-  charObjects.forEach(charObj => includedChars+=charObj.chars);
+function generatePassword(length, characterSet) {
   var password=[];
-  console.log(includedChars);
   for (i=0; i<length; ++i) {
-    password[i] = includedChars.charAt(Math.floor(Math.random() * includedChars.length));
+    password[i] = getRandomCharacter(characterSet.includedChars);
   }
+  for (i=0; i<characterSet.requiredChars.length; ++i){
+    password[getRandomIndex(password)] = characterSet.requiredChars[i];
+   }
   return password.join('');
+}
+
+function getCharacterSet(charObjects) {
+  characterSet= {requiredChars:'', includedChars: ''}
+  charObjects.forEach(charObj => characterSet['requiredChars']+=getRandomCharacter(charObj.chars));
+  charObjects.forEach(charObj => characterSet['includedChars']+=charObj.chars);
+  return characterSet;
+}
+
+function getRandomCharacter(string) {
+  return string.charAt(getRandomIndex(string));
+}
+
+function getRandomIndex(array) {
+  return Math.floor(Math.random() * array.length)
 }
 
