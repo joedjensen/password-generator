@@ -16,7 +16,7 @@ function writePassword() {
   // prompt user to input length
   var length = prompt("How long should your password be? 8 to 128 (inclusive)?")
   // if length is not between 8 and 128 prompt again
-  while (length < 8 || length > 128) {
+  while (length < 8 || length > 128 || isNaN(length)) {
     length = prompt("Please enter a length between 8 and 128");
   }
   // for each element of the array, ask user whether or not to include the characters
