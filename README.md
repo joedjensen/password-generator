@@ -9,7 +9,7 @@ This repository utilizes
 * CSS
 * JavaScript
 
-[Deployed Site](https://joedjensen.github.io/horiseon-accessible/)
+[Deployed Site](https://joedjensen.github.io/password-generator/)
 
 ## Installation 
 N/A
