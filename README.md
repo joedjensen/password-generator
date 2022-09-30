@@ -42,8 +42,12 @@ We are then able to loop over these objects to display prompts, and store on the
   }
 ```
 
-Selected characters are then passed to the password generation function, and used to create a password of desired length.
-
+Selected characters are then passed to the password generation function, and used to create a password of desired length. After random characters are selected from the entire set, one of each is placed at a random index. This is not a guarantee that one of each is included (due to potential collisions).
+```Javascript
+  for (i = 0; i < inputCharacters.requiredChars.length; ++i) {
+    password[getRandomIndex(password.length)] = inputCharacters.requiredChars[i];
+  }
+```
 ## License
 
 Please refer to the license in the repo
